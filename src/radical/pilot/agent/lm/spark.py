@@ -9,8 +9,9 @@ import sys
 import socket
 import random
 
-from .base import LaunchMethod
+import radical.utils as ru
 
+from .base import LaunchMethod
 
 
 # ==============================================================================
@@ -37,7 +38,7 @@ class Spark(LaunchMethod):
         if not os.environ.get('SPARK_HOME'):
             logger.info("Downloading Apache Spark..")
             try:    
-                VERSION = "1.0.2"
+                VERSION = "2.0.2"
                 subprocess.check_call("wget http://d3kbcqa49mib13.cloudfront.net/spark-2.0.2-bin-hadoop2.7.tgz".split())
                 subprocess.check_call('tar -xzf spark-2.0.2-bin-hadoop2.7.tgz'.split())
                 subprocess.check_call(("mv spark-2.0.2-bin-hadoop2.7 spark-" + VERSION).split())
@@ -111,7 +112,7 @@ class Spark(LaunchMethod):
         spark_env_file.write('export SPARK_MASTER_IP=' + master_ip + "\n")
         spark_env_file.write('export JAVA_HOME=' + java_home + "\n")
         spark_env_file.write('export SPARK_LOG_DIR='+os.getcwd()+'/spark-logs'+'\n')
-        spark_env_file.write('export PYSPARK_PYTHON=`which python` \n')
+        #spark_env_file.write('export PYSPARK_PYTHON=`which python` \n')
         spark_env_file.close()
 
 
@@ -120,7 +121,7 @@ class Spark(LaunchMethod):
             subprocess.check_output(spark_home + '/sbin/start-all.sh')
         except Exception as e:
             raise RuntimeError("Spark Cluster failed to start: %s" % e)
-        
+
         logger.info('Start Spark Cluster')
         launch_command = spark_home +'/bin'
 
@@ -144,8 +145,7 @@ class Spark(LaunchMethod):
     @classmethod
     def lrms_shutdown_hook(cls, name, cfg, lrms, lm_info, logger):
         if 'name' not in lm_info:
-            raise RuntimeError('name not in lm_info for %s' \
-                    % (self.name))
+            raise RuntimeError('name not in lm_info for %s' % name)
 
         if lm_info['name'] != 'SPARKLRMS':
             logger.info('Stoping SPARK')
