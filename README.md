@@ -15,4 +15,3 @@ The `devel` branch (and any other branches than master, for that matter)
 may not correspond to the publised documentation, and specifically may have
 dependencies which need to be resolved manually.  Please contact us over the
 mailing list if you need advice on the usage of any non-master branch.
-
