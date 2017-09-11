@@ -22,7 +22,7 @@ import radical.utils as ru  # noqa
 # RADICAL_PILOT_SANDBOX:
 #   --> Pilot agent's sandbox's location for this run,
 #           default: $HOME
-#           example: $HOME/.jenkins/build
+#           example: $HOME/<RADICAL_PILOT_SANDBOX>
 #
 # ------------------------------------------------------------------------------
 
@@ -68,8 +68,9 @@ class AcceptanceTests(unittest.TestCase):
         )
 
         # Define a location for the Pilot Agent's sandbox location
-        self.sandbox_location = os.getenv(
-            'RADICAL_PILOT_SANDBOX', default='$HOME').trim()
+        self.sandbox_location = '$HOME/{}'.format(
+            os.getenv('RADICAL_PILOT_SANDBOX', default='').trim()
+        )
 
         # Create a new session. No need to try/except this: if session creation
         # fails, there is not much we can do anyways...
