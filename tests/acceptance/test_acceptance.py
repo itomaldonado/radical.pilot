@@ -69,7 +69,7 @@ class AcceptanceTests(unittest.TestCase):
 
         # Define a location for the Pilot Agent's sandbox location
         self.sandbox_location = '$HOME/{}'.format(
-            os.getenv('RADICAL_PILOT_SANDBOX', default='').trim()
+            os.getenv('RADICAL_PILOT_SANDBOX', default='').strip()
         )
 
         # Create a new session. No need to try/except this: if session creation
