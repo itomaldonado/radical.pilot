@@ -3,7 +3,7 @@
     "local.localhost" : {
         "project"  : null,
         "queue"    : null,
-        "schema"   : "ssh",
+        "schema"   : null,
         "cores"    : 2
     },
 
