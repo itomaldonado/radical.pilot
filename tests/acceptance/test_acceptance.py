@@ -12,6 +12,18 @@ import radical.utils as ru  # noqa
 #
 # READ the RADICAL-Pilot documentation: http://radicalpilot.readthedocs.org/
 #
+#
+# Environment Variables:
+#
+# RADICAL_PILOT_RESOURCE:
+#   --> Radical Pilot's resource,
+#           default: local.localhost
+#
+# RADICAL_PILOT_SANDBOX:
+#   --> Postfix of pilot agent's sandbox's location for this run,
+#           default: manual
+#           example: $HOME/radical.pilot.sandbox.tests/<RADICAL_PILOT_SANDBOX>
+#
 # ------------------------------------------------------------------------------
 
 #######################################
@@ -54,6 +66,11 @@ class AcceptanceTests(unittest.TestCase):
             'RADICAL_PILOT_RESOURCE',
             default='local.localhost'
         )
+
+        # Define a location for the Pilot Agent's sandbox location
+        self.sandbox_location = '$HOME/radical.pilot.sandbox.tests/{}'.format(
+            os.getenv('RADICAL_PILOT_SANDBOX', default='manual'))
+
         # Create a new session. No need to try/except this: if session creation
         # fails, there is not much we can do anyways...
         self.session = rp.Session()
@@ -72,7 +89,7 @@ class AcceptanceTests(unittest.TestCase):
             'queue': self.config[self.resource]['queue'],
             'access_schema': self.config[self.resource]['schema'],
             'cores': self.config[self.resource]['cores'],
-        }
+            'sandbox': self.sandbox_location}
 
     def test_00_getting_started(self):
         """Test a standard pilot run"""
