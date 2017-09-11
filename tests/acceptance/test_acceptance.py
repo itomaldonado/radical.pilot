@@ -254,6 +254,7 @@ class AcceptanceTests(unittest.TestCase):
                 'queue': self.config[resource]['queue'],
                 'access_schema': self.config[resource]['schema'],
                 'cores': self.config[resource]['cores'],
+                'sandbox': self.sandbox_location
             }
             pilot_descriptions.append(rp.ComputePilotDescription(pd_init))
 
