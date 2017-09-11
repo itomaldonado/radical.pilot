@@ -20,9 +20,9 @@ import radical.utils as ru  # noqa
 #           default: local.localhost
 #
 # RADICAL_PILOT_SANDBOX:
-#   --> Postfix of pilot agent's sandbox's location for this run,
-#           default: manual
-#           example: $HOME/radical.pilot.sandbox.tests/<RADICAL_PILOT_SANDBOX>
+#   --> Pilot agent's sandbox's location for this run,
+#           default: $HOME/.tests
+#           example: $HOME/.jenkins/build
 #
 # ------------------------------------------------------------------------------
 
@@ -68,8 +68,8 @@ class AcceptanceTests(unittest.TestCase):
         )
 
         # Define a location for the Pilot Agent's sandbox location
-        self.sandbox_location = '$HOME/radical.pilot.sandbox.tests/{}'.format(
-            os.getenv('RADICAL_PILOT_SANDBOX', default='manual'))
+        self.sandbox_location = os.getenv(
+            'RADICAL_PILOT_SANDBOX', default='$HOME/.rp-tests').trim()
 
         # Create a new session. No need to try/except this: if session creation
         # fails, there is not much we can do anyways...
