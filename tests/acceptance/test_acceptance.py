@@ -147,7 +147,10 @@ class AcceptanceTests(unittest.TestCase):
             'stdout',
             'stderr',
             'pilot',
-            'sandbox',
+            'resource_sandbox',
+            'pilot_sandbox',
+            'unit_sandbox',
+            'client_sandbox',
             'description',
         ]
 
