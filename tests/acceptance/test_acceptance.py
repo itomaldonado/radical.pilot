@@ -225,9 +225,8 @@ class AcceptanceTests(unittest.TestCase):
         for description in units:
             if description.state == "DONE":
                 done_units += 1
-        self.assertGreaterEqual(
-            (float(done_units) / float(self.n)), 0.50,
-            "Only {0}% of CUs were DONE."
+        self.assertAlmostEquals((float(done_units) / float(self.n)),
+            0.50, places=1, msg="Only {0}% of CUs were DONE."
             .format(str((float(done_units) / float(self.n)) * 100.00)))
 
     def test_03_multiple_pilots(self):
