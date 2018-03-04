@@ -74,6 +74,7 @@ class AcceptanceTests(unittest.TestCase):
         # Define an [n]-core local pilot that runs for [x] minutes
         # Here we use a dict to initialize the description object
         self.pd_init = {
+            'name': 'Acceptance-Test',
             'resource': self.resource,
             'runtime': 15,  # pilot runtime (min)
             'exit_on_error': True,
@@ -242,6 +243,7 @@ class AcceptanceTests(unittest.TestCase):
         resource_count = len(resources)
         for resource in resources:
             pd_init = {
+                'name': 'Acceptance-Test',
                 'resource': resource,
                 'runtime': 15,  # pilot runtime (min)
                 'exit_on_error': True,
