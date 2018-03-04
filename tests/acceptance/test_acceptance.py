@@ -235,7 +235,7 @@ class AcceptanceTests(unittest.TestCase):
 
         # Have to hard-code list of resources
         # TODO: get real list of resources
-        resources = ['local.localhost']
+        resources = [self.resource]
 
         # Create multiple pilot descriptions, one for each resource
         pilot_descriptions = list()
